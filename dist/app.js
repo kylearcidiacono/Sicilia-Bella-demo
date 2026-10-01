@@ -66,22 +66,29 @@ showMenu('starters');
 const header = document.querySelector('header');
 const headerActions = document.querySelector('.header-actions');
 if (header && headerActions) {
-  const menuButton = document.createElement('button');
-  menuButton.className = 'mobile-menu-toggle';
-  menuButton.type = 'button';
-  menuButton.setAttribute('aria-label', 'Open navigation');
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-controls', 'mobile-navigation');
-  menuButton.innerHTML = '<span></span><span></span><span></span>';
+  let menuButton = header.querySelector('.mobile-menu-toggle');
+  let mobileNav = header.querySelector('#mobile-menu, #mobile-navigation');
 
-  const mobileNav = document.createElement('nav');
-  mobileNav.id = 'mobile-navigation';
-  mobileNav.className = 'mobile-navigation';
-  mobileNav.setAttribute('aria-label', 'Mobile navigation');
-  mobileNav.innerHTML = '<a href="/#menu">Menu</a><a href="/#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
+  if (menuButton && mobileNav) {
+    mobileNav.classList.add('mobile-navigation');
+  } else {
+    menuButton = document.createElement('button');
+    menuButton.className = 'mobile-menu-toggle';
+    menuButton.type = 'button';
+    menuButton.setAttribute('aria-label', 'Open navigation');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-controls', 'mobile-navigation');
+    menuButton.innerHTML = '<span></span><span></span><span></span>';
 
-  headerActions.append(menuButton);
-  header.append(mobileNav);
+    mobileNav = document.createElement('nav');
+    mobileNav.id = 'mobile-navigation';
+    mobileNav.className = 'mobile-navigation';
+    mobileNav.setAttribute('aria-label', 'Mobile navigation');
+    mobileNav.innerHTML = '<a href="/#menu">Menu</a><a href="/#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
+
+    headerActions.append(menuButton);
+    header.append(mobileNav);
+  }
 
   const closeMobileNav = () => {
     menuButton.setAttribute('aria-expanded', 'false');
@@ -153,14 +160,18 @@ function showSlide(nextSlide) {
   const description = document.querySelector('#story-description');
   const counter = document.querySelector('.story-index');
   const label = document.querySelector('.story-copy .eyebrow');
+  const category = document.querySelector('.story-category');
   if (title) title.innerHTML = storyTitles[nextSlide];
   if (description) description.textContent = storyDescriptions[nextSlide];
   if (counter) counter.textContent = `0${nextSlide + 1} / 03`;
-  if (label && innerWidth <= 750) label.textContent = storyLabels[nextSlide];
+  if (label && innerWidth <= 750 && !category) label.textContent = storyLabels[nextSlide];
+  if (category) category.textContent = storyLabels[nextSlide];
 }
 
 const storyLabel = document.querySelector('.story-copy .eyebrow');
-if (storyLabel && innerWidth <= 750) storyLabel.textContent = storyLabels[0];
+const storyCategory = document.querySelector('.story-category');
+if (storyLabel && innerWidth <= 750 && !storyCategory) storyLabel.textContent = storyLabels[0];
+if (storyCategory) storyCategory.textContent = storyLabels[0];
 
 document.querySelectorAll('[data-slide]').forEach((button) => {
   button.addEventListener('click', () => showSlide(Number(button.dataset.slide)));
