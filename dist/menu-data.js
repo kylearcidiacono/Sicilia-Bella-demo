@@ -36,12 +36,10 @@ window.restaurantMenu = {
     ['Rib-Eye','€29.50','Charcoal-grilled rib-eye with mushroom or pepper sauce.'],
     ['Tagliata','€28','Grilled tagliata served with cherry tomatoes, rucola and parmigiano flakes.'],
     ['Slow-Cooked Spare Ribs','€23','Tender pork spare ribs with house-made BBQ sauce.'],
-    ['Osso Buco','€24','Slow-cooked osso buco with celery, carrots, onions and tomato sauce.'],
     ['Chicken Roulade','€22','Baked chicken roulade served with butter sauce.']
   ],
   maltese: [
     ['Typical Maltese Platter','€22 / €44','Serves 2 / serves 4. Galletti, sundried tomatoes, ravioli, goat cheese, ġbejniet, olives, bigilla and capers.'],
-    ['Aljotta','€12','Maltese fish soup.'],
     ['Ravioli','€13','Local ravioli filled with goat cheese and tomato sauce.'],
     ['Octopus Stew','€24','Slow-cooked octopus in tomato sauce, garlic, wine, olives and local herbs.'],
     ['Stuffat tal-Fenek','€21','Slow-cooked local rabbit in tomato sauce, local herbs, peas and wine.'],
