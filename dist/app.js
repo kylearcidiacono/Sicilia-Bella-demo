@@ -63,6 +63,50 @@ tabs.forEach((tab, index) => {
 
 showMenu('starters');
 
+const header = document.querySelector('header');
+const headerActions = document.querySelector('.header-actions');
+if (header && headerActions) {
+  const menuButton = document.createElement('button');
+  menuButton.className = 'mobile-menu-toggle';
+  menuButton.type = 'button';
+  menuButton.setAttribute('aria-label', 'Open navigation');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-controls', 'mobile-navigation');
+  menuButton.innerHTML = '<span></span><span></span><span></span>';
+
+  const mobileNav = document.createElement('nav');
+  mobileNav.id = 'mobile-navigation';
+  mobileNav.className = 'mobile-navigation';
+  mobileNav.setAttribute('aria-label', 'Mobile navigation');
+  mobileNav.innerHTML = '<a href="#menu">Menu</a><a href="#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
+
+  headerActions.append(menuButton);
+  header.append(mobileNav);
+
+  const closeMobileNav = () => {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation');
+    mobileNav.classList.remove('open');
+  };
+
+  menuButton.addEventListener('click', () => {
+    const opening = menuButton.getAttribute('aria-expanded') !== 'true';
+    menuButton.setAttribute('aria-expanded', String(opening));
+    menuButton.setAttribute('aria-label', opening ? 'Close navigation' : 'Open navigation');
+    mobileNav.classList.toggle('open', opening);
+  });
+
+  mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileNav));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMobileNav();
+  });
+  document.addEventListener('click', (event) => {
+    if (!mobileNav.classList.contains('open')) return;
+    if (header.contains(event.target)) return;
+    closeMobileNav();
+  });
+}
+
 const dialog = document.querySelector('#booking');
 if (dialog) {
   document.querySelectorAll('[data-book]').forEach((button) => {
@@ -88,6 +132,7 @@ const storyDescriptions = [
   'Mussels, calamari, prawns and fish with Mediterranean flavours.',
   'Rib-eye, tagliata, ribs and more for a relaxed meal by the harbour.'
 ];
+const storyLabels = ['PASTA', 'SEAFOOD', 'MEAT'];
 let currentSlide = 0;
 
 function showSlide(nextSlide) {
@@ -107,10 +152,15 @@ function showSlide(nextSlide) {
   const title = document.querySelector('#story-title');
   const description = document.querySelector('#story-description');
   const counter = document.querySelector('.story-index');
+  const label = document.querySelector('.story-copy .eyebrow');
   if (title) title.innerHTML = storyTitles[nextSlide];
   if (description) description.textContent = storyDescriptions[nextSlide];
   if (counter) counter.textContent = `0${nextSlide + 1} / 03`;
+  if (label && innerWidth <= 750) label.textContent = storyLabels[nextSlide];
 }
+
+const storyLabel = document.querySelector('.story-copy .eyebrow');
+if (storyLabel && innerWidth <= 750) storyLabel.textContent = storyLabels[0];
 
 document.querySelectorAll('[data-slide]').forEach((button) => {
   button.addEventListener('click', () => showSlide(Number(button.dataset.slide)));
@@ -123,7 +173,7 @@ if (!reducedMotion.matches) {
 
   if (storySection) {
     addEventListener('scroll', () => {
-      if (queued || innerWidth <= 750) return;
+      if (queued) return;
       queued = true;
 
       requestAnimationFrame(() => {
@@ -131,7 +181,7 @@ if (!reducedMotion.matches) {
         if (rect.top <= 0 && rect.bottom >= innerHeight) {
           const denominator = rect.height - innerHeight;
           if (denominator > 0) {
-            const progress = Math.max(0, Math.min(1, -rect.top / denominator));
+            const progress = Math.max(0, Math.min(0.9999, -rect.top / denominator));
             showSlide(Math.min(2, Math.floor(progress * 3)));
           }
         }
