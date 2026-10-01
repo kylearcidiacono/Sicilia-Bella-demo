@@ -6,3 +6,7 @@ header .logo{background:transparent}header .logo img{object-fit:contain}
 /* Keep the approved restaurant mark legible on phones and desktop. */
 header .logo{width:132px;height:88px;flex-shrink:0}header .logo img{display:block;object-fit:contain}
 @media(max-width:750px){header .logo{width:116px;height:78px}}
+
+/* Header CTA + circular social icons */
+.header-actions{display:flex;align-items:center;gap:14px}.header-socials{display:flex;align-items:center;gap:9px}.social-button{width:42px;height:42px;padding:0;border-radius:50%;border:1px solid #ffffff55}.social-button svg{width:19px;height:19px;display:block;fill:none;stroke:currentColor;stroke-width:1.8}.social-button svg path{fill:currentColor;stroke:none}.social-button .social-dot{fill:currentColor;stroke:none}.header-book{white-space:nowrap}
+@media(max-width:750px){header{padding:12px 4%;gap:8px}header .logo{width:88px;height:62px}.header-actions{margin-left:auto;gap:7px}.header-socials{gap:5px}.social-button{width:34px;height:34px}.social-button svg{width:16px;height:16px}.header-book{padding:11px 12px;font-size:11px}}
