@@ -78,7 +78,7 @@ if (header && headerActions) {
   mobileNav.id = 'mobile-navigation';
   mobileNav.className = 'mobile-navigation';
   mobileNav.setAttribute('aria-label', 'Mobile navigation');
-  mobileNav.innerHTML = '<a href="#menu">Menu</a><a href="#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
+  mobileNav.innerHTML = '<a href="/#menu">Menu</a><a href="/#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
 
   headerActions.append(menuButton);
   header.append(mobileNav);
