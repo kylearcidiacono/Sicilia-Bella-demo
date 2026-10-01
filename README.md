@@ -1,11 +1,48 @@
-# Sicilia Bella demo
+# Sicilia Bella Ristorante website
 
-Complete static website in `dist/`, including the approved logo, food photographs and full text menu.
+Production-ready static website for Sicilia Bella Ristorante in Mġarr Harbour, Gozo.
 
-## Existing Cloudflare Worker
+## Stack
 
-Rename `wrangler.example.jsonc` to `wrangler.jsonc` and replace its `name` value with your existing Worker's exact name. The example is deliberately inactive until that name is confirmed.
+- Static site served from `dist/`
+- Cloudflare Workers Static Assets
+- No build step
+- No database
+- No analytics or advertising trackers
+- Reservations are confirmed directly by telephone
 
-For a Git-connected Worker, use this repository root, no build command, and deploy command `npx wrangler deploy`. Keep `dist/` intact. No compilation is required.
+## Main pages
 
-Reservations contact the restaurant directly; no online booking backend is included.
+- `/` — restaurant homepage and menu
+- `/reviews/` — selected Google reviews with links to the full Google listing and review form
+- `/privacy/` — privacy policy
+- `/cookies/` — cookie policy
+- `/accessibility/` — accessibility statement
+
+## Deployment
+
+The Worker configuration is in `wrangler.jsonc`. The static asset directory is `./dist`.
+
+For the existing Git-connected Worker, deploy from the repository root using the configured Cloudflare deployment workflow. No compilation is required.
+
+## Go-live domain checklist
+
+The current canonical URLs, Open Graph URLs, schema URL and `sitemap.xml` use the existing Cloudflare Worker address. When the client's final custom domain is connected, replace the Worker hostname in:
+
+- `dist/index.html`
+- `dist/reviews/index.html`
+- `dist/privacy/index.html`
+- `dist/cookies/index.html`
+- `dist/accessibility/index.html`
+- `dist/robots.txt`
+- `dist/sitemap.xml`
+
+Do this before submitting the production domain to Google Search Console.
+
+## Content maintenance
+
+- Confirm menu items and prices with the restaurant before changing `dist/menu-data.js`.
+- Keep the allergen notice visible unless verified dish-by-dish allergen data is supplied by the restaurant.
+- Update opening hours on the homepage and Restaurant structured data together.
+- Selected review text is manually curated; Google remains the source of the complete review history.
+- If analytics, pixels, online forms, newsletters, booking systems or payment services are added later, review and update the privacy/cookie setup before enabling them.
