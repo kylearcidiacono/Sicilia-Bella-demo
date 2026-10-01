@@ -139,8 +139,12 @@ const storyDescriptions = [
   'Mussels, calamari, prawns and fish with Mediterranean flavours.',
   'Rib-eye, tagliata, ribs and more for a relaxed meal by the harbour.'
 ];
-const storyLabels = ['PASTA', 'SEAFOOD', 'MEAT'];
 let currentSlide = 0;
+
+const storyLabel = document.querySelector('.story-copy .eyebrow');
+const storyCategory = document.querySelector('.story-category');
+if (storyLabel) storyLabel.textContent = 'AT THE TABLE';
+if (storyCategory) storyCategory.hidden = true;
 
 function showSlide(nextSlide) {
   if (nextSlide === currentSlide) return;
@@ -159,19 +163,10 @@ function showSlide(nextSlide) {
   const title = document.querySelector('#story-title');
   const description = document.querySelector('#story-description');
   const counter = document.querySelector('.story-index');
-  const label = document.querySelector('.story-copy .eyebrow');
-  const category = document.querySelector('.story-category');
   if (title) title.innerHTML = storyTitles[nextSlide];
   if (description) description.textContent = storyDescriptions[nextSlide];
   if (counter) counter.textContent = `0${nextSlide + 1} / 03`;
-  if (label && innerWidth <= 750 && !category) label.textContent = storyLabels[nextSlide];
-  if (category) category.textContent = storyLabels[nextSlide];
 }
-
-const storyLabel = document.querySelector('.story-copy .eyebrow');
-const storyCategory = document.querySelector('.story-category');
-if (storyLabel && innerWidth <= 750 && !storyCategory) storyLabel.textContent = storyLabels[0];
-if (storyCategory) storyCategory.textContent = storyLabels[0];
 
 document.querySelectorAll('[data-slide]').forEach((button) => {
   button.addEventListener('click', () => showSlide(Number(button.dataset.slide)));
