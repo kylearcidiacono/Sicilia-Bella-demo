@@ -64,32 +64,10 @@ tabs.forEach((tab, index) => {
 showMenu('starters');
 
 const header = document.querySelector('header');
-const headerActions = document.querySelector('.header-actions');
-if (header && headerActions) {
-  let menuButton = header.querySelector('.mobile-menu-toggle');
-  let mobileNav = header.querySelector('#mobile-menu, #mobile-navigation');
+const menuButton = header?.querySelector('.mobile-menu-toggle');
+const mobileNav = header?.querySelector('.mobile-navigation');
 
-  if (menuButton && mobileNav) {
-    mobileNav.classList.add('mobile-navigation');
-  } else {
-    menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-toggle';
-    menuButton.type = 'button';
-    menuButton.setAttribute('aria-label', 'Open navigation');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-controls', 'mobile-navigation');
-    menuButton.innerHTML = '<span></span><span></span><span></span>';
-
-    mobileNav = document.createElement('nav');
-    mobileNav.id = 'mobile-navigation';
-    mobileNav.className = 'mobile-navigation';
-    mobileNav.setAttribute('aria-label', 'Mobile navigation');
-    mobileNav.innerHTML = '<a href="/#menu">Menu</a><a href="/#harbour">Harbour</a><a href="/reviews/">Reviews</a><a href="/contact/index.html">Contact</a>';
-
-    headerActions.append(menuButton);
-    header.append(mobileNav);
-  }
-
+if (header && menuButton && mobileNav) {
   const closeMobileNav = () => {
     menuButton.setAttribute('aria-expanded', 'false');
     menuButton.setAttribute('aria-label', 'Open navigation');
@@ -104,9 +82,11 @@ if (header && headerActions) {
   });
 
   mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileNav));
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMobileNav();
   });
+
   document.addEventListener('click', (event) => {
     if (!mobileNav.classList.contains('open')) return;
     if (header.contains(event.target)) return;
@@ -140,11 +120,6 @@ const storyDescriptions = [
   'Rib-eye, tagliata, ribs and more for a relaxed meal by the harbour.'
 ];
 let currentSlide = 0;
-
-const storyLabel = document.querySelector('.story-copy .eyebrow');
-const storyCategory = document.querySelector('.story-category');
-if (storyLabel) storyLabel.textContent = 'AT THE TABLE';
-if (storyCategory) storyCategory.hidden = true;
 
 function showSlide(nextSlide) {
   if (nextSlide === currentSlide) return;
