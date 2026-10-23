@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sicilia-bella-demo.kylearcidiacono1.workers.dev/sitemap.xml
+Sitemap: https://siciliabellagozo.com/sitemap.xml
