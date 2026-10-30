@@ -59,15 +59,18 @@ If analytics, pixels, online forms, newsletters, online reservations, payment se
 
 The Worker configuration is in `wrangler.jsonc`. Static assets are served from `./dist`.
 
-The custom domain must not be attached until the restaurant approves publication.
+The production custom domain is attached to the Worker in Cloudflare:
+
+- `https://siciliabellagozo.com` is the canonical live site.
+- `https://www.siciliabellagozo.com` permanently redirects (301) to the apex domain while preserving the path and query string.
 
 ## Launch checklist
 
 1. Confirm the final menu, festive menu and seasonal opening hours with the restaurant.
-2. Confirm `siciliabellagozo.com` is active in Cloudflare.
+2. Confirm `siciliabellagozo.com` remains active in Cloudflare.
 3. Preserve all existing MX/TXT email records.
-4. Attach `siciliabellagozo.com` to the Sicilia Bella Worker as a Custom Domain.
-5. Configure `www.siciliabellagozo.com` to redirect permanently (301) to `https://siciliabellagozo.com`, preserving path and query string.
+4. Confirm `siciliabellagozo.com` remains attached to the Sicilia Bella Worker as a Custom Domain.
+5. Confirm `www.siciliabellagozo.com` continues to redirect permanently (301) to `https://siciliabellagozo.com`, preserving path and query string.
 6. Verify HTTPS and the Cloudflare certificate.
 7. Test homepage, menu tabs, festive CTA, reviews, Google review button, contact links, legal pages, mobile navigation and reservation buttons.
 8. Verify `https://siciliabellagozo.com/robots.txt`.

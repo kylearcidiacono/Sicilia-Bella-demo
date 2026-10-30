@@ -10,6 +10,12 @@ Last technical review: 23 October 2026
 - Hosting: Cloudflare Workers Static Assets
 - Source control: GitHub repository `kylearcidiacono/Sicilia-Bella-demo`
 
+## Production status
+
+- Canonical live domain: `https://siciliabellagozo.com`
+- The apex domain is attached to the Cloudflare Worker serving the site.
+- `https://www.siciliabellagozo.com` is configured as a permanent (301) redirect to the apex domain, preserving paths and query strings.
+
 The restaurant/client should retain ownership of the domain registration. Website maintenance access can be delegated without sharing the owner's registrar password.
 
 ## Architecture
@@ -93,11 +99,11 @@ Opening hours must be updated in all three places when changed:
 2. contact page;
 3. Restaurant structured data.
 
-## Launch-day DNS
+## Production DNS
 
 Preferred canonical hostname: `siciliabellagozo.com`.
 
-Attach the apex domain to the Worker. Configure `www.siciliabellagozo.com` as a 301 redirect to the apex hostname while preserving the path/query string.
+The apex domain is attached to the Worker. `www.siciliabellagozo.com` is configured as a 301 redirect to the apex hostname while preserving the path/query string.
 
 Do not remove existing MX/TXT email records when changing website DNS.
 
